@@ -45,7 +45,7 @@ jobs:
 
             git add .github/ubiquitybot-config.yml
             git commit -m "fix: use latest ubiquibot config setup"
-            git remote set-url origin "https://github.com/${ownerName}/${repoName}.git"
+            git remote add origin "https://github.com/${ownerName}/${repoName}.git"
             git push origin $defaultBranch
             cd ..
           done
