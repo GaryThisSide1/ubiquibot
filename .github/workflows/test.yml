@@ -41,7 +41,7 @@ jobs:
             cd $repoName
             defaultBranch=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
 
-            cp ../.github/ubiquity-bot.yml .github/ubiquity-bot.yml
+            cp ../.github/ubiquibot-config.yml .github/ubiquity-config.yml
 
             git add .github/ubiquity-bot.yml
             git commit -m "fix: use latest ubiquibot config setup"
