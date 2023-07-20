@@ -24,7 +24,7 @@ jobs:
       
       - name: Update config params for partner projects
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.PAT }}
         run: |
           declare -a repoUrls=(
              "https://github.com/Alpha-Labs-Global/blockalizer"
