@@ -19,9 +19,6 @@ jobs:
           git config --global user.name "AnakinSkywalkeer"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
       
-      - name: Install jq
-        run: sudo apt-get -y install jq
-      
       - name: Update config params for partner projects
         env:
           GITHUB_TOKEN: ${{ secrets.IDK }}
