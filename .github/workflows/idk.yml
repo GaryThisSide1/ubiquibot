@@ -1,0 +1,52 @@
+name: idk
+on:
+  workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+          id-token: write
+          contents: read
+          issues: write
+          pull-requests: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+        
+      - name: Set up Git
+        run: |
+          git config --global user.name "AnakinSkywalkeer"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+      
+      - name: Update config params for partner projects
+        env:
+          GH_TOKEN: ${{ secrets.IDK }}
+        run: |
+          declare -a repoUrls=(
+             "https://github.com/Alpha-Labs-Global/blockalizer"
+             "https://github.com/ubiquity/pay.ubq.fi"
+             "https://github.com/ubiquity/ubq.fi"
+             "https://github.com/ubiquity/ts-template"
+             "https://github.com/ubiquity/scraper-kernel"
+             "https://github.com/ubiquity/bounty-bot"
+             "https://github.com/ubiquity/ubiquity-dollar"
+             "https://github.com/ubiquity/devpool-directory-bounties"
+             "https://github.com/ubiquity/gnosischain.world"
+             "https://github.com/ubiquibot/QA-Improvements"
+             "https://github.com/ubiquity/action-conventional-commits"
+             "https://github.com/ubiquity/github-agents"
+          )
+          for url in "${repoUrls[@]}"
+          do
+            repoName=$(basename $url)
+            ownerName=$(echo $url | awk -F/ '{print $(NF-1)}')
+            git clone $url
+            cd $repoName
+            defaultBranch=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
+            cp ../.github/ubiquibot-config.yml .github/ubiquitybot-config.yml
+            git add .github/ubiquitybot-config.yml
+            git commit -m "fix: use latest ubiquibot config setup"
+            gh pr create --base $defaultBranch --title "fix: update the ubiquitybot-config.yml" --body "" 
+            cd ..
+          done
