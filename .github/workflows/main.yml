@@ -22,9 +22,7 @@ jobs:
       - name: Install jq
         run: sudo apt-get -y install jq
       
-      - name: Update config params for partner projects
-        env:
-          GH_TOKEN: ${{ secrets.PAT }}
+      - name: Update config params for partner projects 
         run: |
           declare -a repoUrls=(
              "https://github.com/Alpha-Labs-Global/blockalizer"
@@ -49,7 +47,7 @@ jobs:
             defaultBranch=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
             git config --local credential.helper '!f() { sleep 1; echo "username=token"; echo "password=${PAT_TOKEN}"; }; f'
             cp ../.github/ubiquibot-config.yml .github/ubiquitybot-config.yml
-            echo "${GH_TOKEN}" | gh auth login --with-token
+            echo "${{ secrets.PAT }}" | gh auth login --with-token
             git add .github/ubiquitybot-config.yml
             git commit -m "fix: use latest ubiquibot config setup"
             gh pr create --base master --head $defaultBranch --title "fix: update the ubiquitybot-config.yml" --body ""
