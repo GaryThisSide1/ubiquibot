@@ -48,7 +48,8 @@ jobs:
             if [ -f ".github/ubiquibot-config.yml" ]; then
               cp ../.github/ubiquibot-config.yml .github/ubiquibot-config.yml
             else
-              mkdir .github
+              if [-d ".github"]; then
+                 mkdir .github
               touch .github/ubiquibot-config.yml
               cp ../.github/ubiquibot-config.yml .github/ubiquibot-config.yml
             fi
