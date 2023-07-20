@@ -49,9 +49,13 @@ jobs:
               cp ../.github/ubiquibot-config.yml .github/ubiquibot-config.yml
             else
               if [-d ".github"]; then
+                 touch .github/ubiquibot-config.yml
+                 cp ../.github/ubiquibot-config.yml .github/ubiquibot-config.yml
+              else
                  mkdir .github
-              touch .github/ubiquibot-config.yml
-              cp ../.github/ubiquibot-config.yml .github/ubiquibot-config.yml
+                 touch .github/ubiquibot-config.yml
+                 cp ../.github/ubiquibot-config.yml .github/ubiquibot-config.yml
+              fi
             fi
             
             git add .github/ubiquibot-config.yml
