@@ -37,7 +37,7 @@ jobs:
           do
             repoName=$(basename $url)
             ownerName=$(echo $url | awk -F/ '{print $(NF-1)}')
-            git clone https://$ownerName:${{ secrets.PAT }}@$url
+            git clone $url
             cd $repoName
             defaultBranch=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
 
