@@ -18,6 +18,8 @@ jobs:
         run: sudo apt-get -y install jq
       
       - name: Update config params for partner projects
+        env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           declare -a repoUrls=(
              "https://github.com/Alpha-Labs-Global/blockalizer"
@@ -40,7 +42,7 @@ jobs:
             git clone $url
             cd $repoName
             defaultBranch=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
-            git config --local credential.helper '!f() { sleep 1; echo "username=token"; echo "password=${{ secrets.PAT }}"; }; f'
+            git config --local credential.helper '!f() { sleep 1; echo "username=token"; echo "password=${PAT_TOKEN}"; }; f'
             cp ../.github/ubiquibot-config.yml .github/ubiquitybot-config.yml
 
             git add .github/ubiquitybot-config.yml
