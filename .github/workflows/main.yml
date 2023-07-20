@@ -47,10 +47,6 @@ jobs:
             cp ../.github/ubiquibot-config.yml .github/ubiquitybot-config.yml
             git add .github/ubiquitybot-config.yml
             git commit -m "fix: use latest ubiquibot config setup"
-            curl -X POST \
-              -H "Accept: application/vnd.github.v3+json" \
-              -H "Authorization: Bearer $GH_TOKEN" \
-              -d "{\"title\":\"fix: updated the ubiquibot config\",\"body\":\"update\",\"head\":\"${defaultBranch}\",\"base\":\"${defaultBranch}\"}" \
-              "https://api.github.com/repos/$ownerName/$repoName/pulls"
+            gh pr create --base $defaultBranch --title "fix: update the ubiquitybot-config.yml" --body ""
             cd ..
           done
