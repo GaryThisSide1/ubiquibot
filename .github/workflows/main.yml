@@ -20,6 +20,8 @@ jobs:
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
       
       - name: Update config params for partner projects
+        env:
+         GH_TOKEN: ${{ github.token }}
         run: |
           declare -a repoUrls=(
              "https://github.com/Alpha-Labs-Global/blockalizer"
