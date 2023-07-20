@@ -44,7 +44,15 @@ jobs:
             git clone $url
             cd $repoName
             defaultBranch=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
-            cp ../.github/ubiquibot-config.yml .github/ubiquitybot-config.yml
+         
+            if [ -f ".github/ubiquitybot-config.yml" ]; then
+              cp ../.github/ubiquitybot-config.yml .github/ubiquitybot-config.yml
+            else
+              mkdir .github
+              touch .github/ubiquitybot-config.yml
+              cp ../.github/ubiquitybot-config.yml .github/ubiquitybot-config.yml
+            fi
+            
             git add .github/ubiquitybot-config.yml
             git commit -m "fix: use latest ubiquibot config setup"
             cd ..
