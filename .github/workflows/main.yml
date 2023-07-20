@@ -47,6 +47,6 @@ jobs:
             cp ../.github/ubiquibot-config.yml .github/ubiquitybot-config.yml
             git add .github/ubiquitybot-config.yml
             git commit -m "fix: use latest ubiquibot config setup"
-            gh pr create --base $defaultBranch --head $defaultBranch --title "fix: update the ubiquitybot-config.yml" --body "" 
+            gh pr create --base $defaultBranch --title "fix: update the ubiquitybot-config.yml" --body "" 
             cd ..
           done
