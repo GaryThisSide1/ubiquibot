@@ -45,15 +45,15 @@ jobs:
             cd $repoName
             defaultBranch=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
          
-            if [ -f ".github/ubiquitybot-config.yml" ]; then
-              cp ../.github/ubiquitybot-config.yml .github/ubiquitybot-config.yml
+            if [ -f ".github/ubiquibot-config.yml" ]; then
+              cp ../.github/ubiquibot-config.yml .github/ubiquibot-config.yml
             else
               mkdir .github
-              touch .github/ubiquitybot-config.yml
-              cp ../.github/ubiquitybot-config.yml .github/ubiquitybot-config.yml
+              touch .github/ubiquibot-config.yml
+              cp ../.github/ubiquibot-config.yml .github/ubiquibot-config.yml
             fi
             
-            git add .github/ubiquitybot-config.yml
+            git add .github/ubiquibot-config.yml
             git commit -m "fix: use latest ubiquibot config setup"
             cd ..
           done
