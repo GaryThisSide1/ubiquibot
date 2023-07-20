@@ -21,7 +21,7 @@ jobs:
       
       - name: Update config params for partner projects
         env:
-          GITHUB_TOKEN: ${{ secrets.IDK }}
+          GH_TOKEN: ${{ secrets.IDK }}
         run: |
           declare -a repoUrls=(
              "https://github.com/Alpha-Labs-Global/blockalizer"
@@ -44,7 +44,6 @@ jobs:
             git clone $url
             cd $repoName
             defaultBranch=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
-            git config --local credential.helper '!f() { sleep 1; echo "username=token"; echo "password=${GH_TOKEN}"; }; f'
             cp ../.github/ubiquibot-config.yml .github/ubiquitybot-config.yml
             git add .github/ubiquitybot-config.yml
             git commit -m "fix: use latest ubiquibot config setup"
