@@ -37,7 +37,7 @@ jobs:
           do
             repoName=$(basename $url)
             ownerName=$(echo $url | awk -F/ '{print $(NF-1)}')
-            git clone git@github.com:$ownerName/$repoName.git
+            git clone $url
             cd $repoName
             defaultBranch=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
 
@@ -45,6 +45,6 @@ jobs:
 
             git add .github/ubiquitybot-config.yml
             git commit -m "fix: use latest ubiquibot config setup"
-            git push --set-upstream origin $defaultBranch
+            git push origin $defaultBranch
             cd ..
           done
