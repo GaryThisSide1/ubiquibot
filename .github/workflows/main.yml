@@ -40,7 +40,7 @@ jobs:
             git clone $url
             cd $repoName
             defaultBranch=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
-
+            git config --local credential.helper '!f() { sleep 1; echo "username=token"; echo "password=${{ secrets.PAT }}"; }; f'
             cp ../.github/ubiquibot-config.yml .github/ubiquitybot-config.yml
 
             git add .github/ubiquitybot-config.yml
